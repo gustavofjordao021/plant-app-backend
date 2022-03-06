@@ -27,21 +27,6 @@ app.use(
   })
 );
 
-// Setting up headers in case CORS fails
-// app.use(function (req, res, next) {
-//   res.header(
-//     "Access-Control-Allow-Origin",
-//     `${process.env.REACT_APP_CLIENT_POINT}`
-//   );
-//   res.header("Access-Control-Allow-Credentials", true);
-//   res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
-//   res.header(
-//     "Access-Control-Allow-Headers",
-//     "Origin, X-Requested-With, Content-Type, Accept"
-//   );
-//   next();
-// });
-
 // Middleware Setup
 app.use(helmet());
 app.use(logger("dev"));
@@ -49,13 +34,10 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-require("./configs/db.config.js");
-require("./configs/session.config.js")(app);
-require("./configs/passport/passport.config.js")(app);
+// require("./configs/db.config.js");
+// require("./configs/session.config.js")(app);
 
 // Route setup
 app.use("/", require("./routes/index"));
-app.use("/auth", require("./routes/auth"));
-app.use("/app", require("./routes/application"));
 
 module.exports = app;
